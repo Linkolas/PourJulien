@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.example.nicolas.pourjulien.API.APIBuilder;
 import com.example.nicolas.pourjulien.API.RetrofitAPI;
 import com.example.nicolas.pourjulien.model.Complexe;
+import com.example.nicolas.pourjulien.model.NotSoSimple;
 import com.example.nicolas.pourjulien.model.Simple;
 import com.google.gson.JsonObject;
 
@@ -64,11 +65,17 @@ public class MainActivity extends AppCompatActivity {
         simple.setId(42);
         simple.setLibelle("The Answer");
 
+        NotSoSimple nssimple = new NotSoSimple();
+        nssimple.setId(42);
+        nssimple.setLibelle("The Answer");
+        nssimple.setPrice(12);
+
         Complexe complexe = new Complexe(666, "El Diablo");
 
         Intent intent = new Intent(this, Activity2.class);
         intent.putExtra("simple", simple);
         intent.putExtra("complexe", complexe);
+        intent.putExtra("nssimple", nssimple);
         startActivity(intent);
     }
 }
