@@ -1,12 +1,15 @@
 package com.example.nicolas.pourjulien;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.nicolas.pourjulien.API.APIBuilder;
+import com.example.nicolas.pourjulien.API.RetrofitAPI;
+import com.example.nicolas.pourjulien.model.Simple;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendRequest();
+                // sendRequest();
+                switchActivity();
             }
         });
     }
@@ -52,5 +56,14 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(t.getMessage());
             }
         });
+    }
+
+    private void switchActivity() {
+        Simple simple = new Simple();
+        simple.setId(42);
+        simple.setLibelle("The Answer");
+        Intent intent = new Intent(this, Activity2.class);
+        intent.putExtra("simple", simple); //second param is Serializable
+        startActivity(intent);
     }
 }

@@ -1,7 +1,4 @@
-package com.example.nicolas.pourjulien;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+package com.example.nicolas.pourjulien.API;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

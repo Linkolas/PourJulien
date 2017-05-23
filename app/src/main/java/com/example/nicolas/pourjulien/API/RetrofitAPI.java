@@ -1,11 +1,11 @@
-package com.example.nicolas.pourjulien;
+package com.example.nicolas.pourjulien.API;
 
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.http.*;
 
-interface RetrofitAPI {
+public interface RetrofitAPI {
 
     String BASE_URL = "http://opre.ddns.net/espoir/";
 
