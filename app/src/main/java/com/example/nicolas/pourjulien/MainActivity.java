@@ -3,6 +3,7 @@ package com.example.nicolas.pourjulien;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -21,8 +22,12 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    String debugTag = "WOLOLO";
+
     @BindView(R.id.buttonSendRequest)
     Button button1;
+    @BindView(R.id.buttonSendRequest2)
+    Button button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,28 +39,79 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // sendRequest();
-                switchActivity();
+                //switchActivity();
+                sendRequestConnect();
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendRequestSendMessage();
             }
         });
     }
 
+
+
     private void sendRequest() {
-        RetrofitAPI API = APIBuilder.getAPI();
+        RetrofitAPI API = APIBuilder.getAPI(this);
         Call<JsonObject> request = API.testPost("leparam");
         request.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 //... traiter réponse
-                System.out.println("TRAITER REPONSE");
-                System.out.println(response.code());
-                System.out.println(response.body());
+                Log.w(debugTag, "TRAITER REPONSE");
+                Log.w(debugTag, ""+response.code());
+                Log.w(debugTag, ""+response.body());
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 //... traiter échec
-                System.out.println("TRAITER ECHEC");
-                System.out.println(t.getMessage());
+                Log.w(debugTag, "TRAITER ECHEC");
+                Log.w(debugTag, t.getMessage());
+            }
+        });
+    }
+
+    private void sendRequestConnect() {
+        RetrofitAPI API = APIBuilder.getAPI(this);
+        Call<JsonObject> request = API.connexion();
+        request.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                //... traiter réponse
+                Log.w(debugTag, "TRAITER REPONSE");
+                Log.w(debugTag, ""+response.code());
+                Log.w(debugTag, ""+response.body());
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                //... traiter échec
+                Log.w(debugTag, "TRAITER ECHEC");
+                Log.w(debugTag, t.getMessage());
+            }
+        });
+    }
+
+    private void sendRequestSendMessage() {
+        RetrofitAPI API = APIBuilder.getAPI(this);
+        Call<JsonObject> request = API.sendMessage(1, 3 , "UESH CA MARCHE");
+        request.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                //... traiter réponse
+                Log.w(debugTag, "TRAITER REPONSE");
+                Log.w(debugTag, ""+response.code());
+                Log.w(debugTag, ""+response.body());
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                //... traiter échec
+                Log.w(debugTag, "TRAITER ECHEC");
+                Log.w(debugTag, t.getMessage());
             }
         });
     }
